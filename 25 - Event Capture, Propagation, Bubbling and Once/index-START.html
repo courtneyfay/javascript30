@@ -38,8 +38,24 @@
 </style>
 
 <button></button>
-<script>
 
+<script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+    console.log(this.classList.value);
+    e.stopPropagation(); //only returns the one you want, doesn't do the bubbling
+  }
+
+  // document.body.addEventListener('click', logText);
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, //if true, goes one, two, three
+    once: true // listens for a click and then unbinds itself from event listener
+  }));
+
+  button.addEventListener('click', logText, { once: true });
 </script>
 </body>
 </html>
